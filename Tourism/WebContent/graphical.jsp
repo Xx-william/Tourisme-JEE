@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="java.util.ArrayList"%>
+	<%@ page import="java.util.Collection"%>
+	<%@ page import="model.db.CountryDB" %>
+	<%@ page import="model.Country" %>
 <jsp:include page="/utils/header.jsp"></jsp:include>
 
 
@@ -9,24 +13,154 @@
 			<h1>Données</h1>
 			<p>Veuillez choisir un ou plusieurs pays</p>
 			<form>
-
-
 				<div>
-					<select class="selectpicker" multiple
-						title="Choose one of the following...">
-						<option>Mustard</option>
-						<option>Ketchup</option>
-						<option>Relish</option>
+					<select class="selectpicker" 
+						title="Select one country" id="countrySelect">
+						<%
+						ArrayList<String> countrys = CountryDB.getAllCountryName();
+		
+						for(String name : countrys){
+							%>
+						<option><%=name%></option>	
+							
+							<%
+						}
+						%>
 					</select>
 				</div>
+				<div id="testDiv"></div>
+				<script type="text/javascript">
+		
+					$("#countrySelect").change(function(){
+						var countryName = $("#countrySelect").val();
+						$.ajax({type : "POST",
+							url : "/Tourism/Controller/Graphic",
+							data : {country:countryName },
+							dataType: "json",
+							success : function(data) {
+							   var tourists = data.tourists;
+							   var incomes = data.income;
+							   var json_tourists = new Array();
+							   var json_year = new Array();
+							   var json_incomes = new Array();
+							   var countryName = data.name;
+
+							   for(var key in tourists){
+								   json_tourists.push(tourists[key]);
+								   json_year.push(key);						
+							   }
+							       
+							   for(var key in incomes){
+								   json_incomes.push(incomes[key]);
+							   }						   
+							 
+							        $('#container').highcharts({
+							            title: {
+							                text: 'Data',
+							                x: -20 //center
+							            },
+							            subtitle: {
+							                text: 'Source: OpenData',
+							                x: -20
+							            },
+							            xAxis: {
+							                categories: json_year
+							            },
+							            yAxis: {
+							                title: {
+							                    text: 'Millions'
+							                },
+							                plotLines: [{
+							                    value: 0,
+							                    width: 1,
+							                    color: '#808080'
+							                }]
+							            },
+							            tooltip: {
+							                valueSuffix: 'Millions'
+							            },
+							            legend: {
+							                layout: 'vertical',
+							                align: 'right',
+							                verticalAlign: 'middle',
+							                borderWidth: 0
+							            },
+							            series: [
+							                 {
+							                name: countryName + " arrivers",
+							                data: json_tourists
+							           		 },{
+							           			 name: countryName + " recettes",
+							           			 data: json_incomes
+							           		 }
+							               ]
+							        });
+							       
+							},
+							error : function() {							
+									$("#testDiv").append("<h1>fails</h1>");
+							}
+						});
+					});
+					
+				</script>
 				<br>
 				<div>
-					<select class="selectpicker" multiple
-						title="Choose one of the following...">
-						<option>Mustard</option>
-						<option>Ketchup</option>
-						<option>Relish</option>
+					<select class="selectpicker" 
+						title="Select another country" id="countrySelect2">
+						<%
+						ArrayList<String> countrys2 = CountryDB.getAllCountryName();
+						
+						for(String name : countrys2){
+							%>
+						<option><%=name%></option>	
+							
+							<%
+						}
+						%>
 					</select>
+					<script>
+					$("#countrySelect2").change(function(){
+						var countryName = $("#countrySelect2").val();
+						$.ajax({type : "POST",
+							url : "/Tourism/Controller/Graphic",
+							data : {country:countryName },
+							dataType: "json",
+							success : function(data) {
+							   var tourists = data.tourists;
+							   var incomes = data.income;
+							   var json_tourists = new Array();
+							   var json_incomes = new Array();
+							   var countryName = data.name;
+								
+							   var newSeries1 = {
+									   name:"",
+									   data: []
+							   };
+							   var newSeries2 = {
+									   name:"",
+									   data: []
+							   };
+							   
+							   for(var key in tourists){
+								   json_tourists.push(tourists[key]);
+								   json_year.push(key);						
+							   }
+							       
+							   for(var key in incomes){
+								   json_incomes.push(incomes[key]);
+							   }		
+							   
+							   
+							   $('#container').highcharts.addSeries(json_incomes);
+							   $('#container').highcharts.addSeries(json_tourists);
+							},
+							error : function() {							
+									$("#testDiv").append("<h1>fails</h1>");
+							}
+						});
+					});
+					</script>
 				</div>
 
 				<br>
@@ -78,68 +212,7 @@
 
 <script>
 	$(function() {
-		$('#container')
-				.highcharts(
-						{
-							title : {
-								text : 'Monthly Average Temperature',
-								x : -20
-							//center
-							},
-							subtitle : {
-								text : 'Source: WorldClimate.com',
-								x : -20
-							},
-							xAxis : {
-								categories : [ 'Jan', 'Feb', 'Mar', 'Apr',
-										'May', 'Jun', 'Jul', 'Aug', 'Sep',
-										'Oct', 'Nov', 'Dec' ]
-							},
-							yAxis : {
-								title : {
-									text : 'Temperature (°C)'
-								},
-								plotLines : [ {
-									value : 0,
-									width : 1,
-									color : '#808080'
-								} ]
-							},
-							tooltip : {
-								valueSuffix : '°C'
-							},
-							legend : {
-								layout : 'vertical',
-								align : 'right',
-								verticalAlign : 'middle',
-								borderWidth : 0
-							},
-							series : [
-									{
-										name : 'Tokyo',
-										data : [ 7.0, 6.9, 9.5, 14.5, 18.2,
-												21.5, 25.2, 26.5, 23.3, 18.3,
-												13.9, 9.6 ]
-									},
-									{
-										name : 'New York',
-										data : [ -0.2, 0.8, 5.7, 11.3, 17.0,
-												22.0, 24.8, 24.1, 20.1, 14.1,
-												8.6, 2.5 ]
-									},
-									{
-										name : 'Berlin',
-										data : [ -0.9, 0.6, 3.5, 8.4, 13.5,
-												17.0, 18.6, 17.9, 14.3, 9.0,
-												3.9, 1.0 ]
-									},
-									{
-										name : 'London',
-										data : [ 3.9, 4.2, 5.7, 8.5, 11.9,
-												15.2, 17.0, 16.6, 14.2, 10.3,
-												6.6, 4.8 ]
-									} ]
-						});
+		
 	});
 </script>
 

@@ -31,27 +31,27 @@
 	
 	<div class="row">
 		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-primary btn-lg btn-block" href="#" role="button">Professionnel du tourisme</a></p>
+		<p><a class="btn btn-primary btn-lg btn-block" href="<%=request.getContextPath()%>/Controller/Login?id=1" role="button">Professionnel du tourisme</a></p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-primary btn-lg btn-block" href="#" role="button">Développeur</a></p>
+		<p><a class="btn btn-primary btn-lg btn-block" href="<%=request.getContextPath()%>/Controller/Login?id=2" role="button">Développeur</a></p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-primary btn-lg btn-block"  href="#" role="button">Curieux</a></p>
+		<p><a class="btn btn-primary btn-lg btn-block"  href="<%=request.getContextPath()%>/Controller/Login?id=3" role="button">Curieux</a></p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-primary btn-lg btn-block" href="#" role="button">Pas de réponse</a></p>
+		<p><a class="btn btn-primary btn-lg btn-block" href="<%=request.getContextPath()%>/Controller/Login?id=4" role="button">Pas de réponse</a></p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-info btn-lg btn-block" href="#" role="button">Admin</a></p>
+		<p><a class="btn btn-info btn-lg btn-block" href="<%=request.getContextPath()%>/Ajouter.jsp" role="button">Admin</a></p>
 		</div>
 	</div>
  

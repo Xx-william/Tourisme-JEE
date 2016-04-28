@@ -4,9 +4,14 @@ import java.util.HashMap;
 
 public class Country {
 	private String name;
-	private Region region;
 	private HashMap<Integer, Double> tourists;
 	private HashMap<Integer, Double> income;
+
+	public Country(String name,HashMap<Integer, Double> touristsm,HashMap<Integer, Double> income){
+		this.setName(name);
+		this.setIncome(income);
+		this.setTourists(touristsm);
+	}
 	
 	public void setName(String name){
 		this.name = name;
@@ -15,18 +20,17 @@ public class Country {
 		return this.name;
 	}
 	
-	public void setRegion(Region region){
-		this.region = region;
+	public void setTourists(HashMap<Integer,Double> tourists){
+		this.tourists = tourists;
 	}
-	public Region getRegion(){
-		return this.region;
-	}
-	
 	public void addTourists(int year,double number){
 		this.tourists.put(year, number);
 	}
-	public HashMap<Integer,Double> getRourists(){
+	public HashMap<Integer,Double> getTourists(){
 		return this.tourists;
+	}
+	public void setIncome(HashMap<Integer,Double> income){
+		this.income = income;
 	}
 	public void addIncome(int year,double money){
 		this.income.put(year, money);
