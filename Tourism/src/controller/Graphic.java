@@ -23,6 +23,7 @@ public class Graphic extends HttpServlet{
 		Gson gson = new Gson();
 		String json = gson.toJson(country);
 		
+		
 		resp.setContentType("application/json");
 		PrintWriter out = resp.getWriter();
 		out.println(json);
