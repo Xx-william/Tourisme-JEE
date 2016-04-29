@@ -67,6 +67,12 @@ public class UserDB {
 				
 			}catch(Exception e){
 				e.printStackTrace();
+			}finally{
+				try{
+					DBUtil.dropConnection(conn);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 			return user;
 		}

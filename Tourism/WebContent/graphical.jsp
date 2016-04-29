@@ -45,16 +45,43 @@
 							}
 						%>
 					</select>
-					<script type="text/javascript">
-						$("#countrySelect").change(function() {
-							refreshCharts(1);
-						});
-						$("#countrySelect2").change(function() {
-							refreshCharts(2);
-						});
+					
+				</div>
+
+				<br>
+				<div>
+					<input type="checkbox" id="checkbox1" checked disabled>Arrivées (Millions)
+				</div>
+
+				<br>
+				<div>
+					<input type="checkbox" id="checkbox2" checked disabled>Recette (Millions)
+				</div>
+				
+				<br>
+
+				<div class="col-md-8">
+					<button class="btn btn-default" type="button"
+						data-toggle="collapse" data-target="#collapseExample"
+						aria-expanded="false" aria-controls="collapseExample">Détails</button>
+
+					<div class="collapse" id="collapseExample">
+						<br>
+						<div>
+							<input type="checkbox"> Toutes les donées
+						</div>
+						<div>
+							<input type="checkbox"> Comparaison dans le monde
+						</div>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+					
+						var chart;
 
 						var option = {
-								colors: ['#7cb5ec', '#434348'],
+							
 							chart : {
 								renderTo : "container",
 								type : "line"
@@ -93,21 +120,65 @@
 							series : [ {
 								name : "",
 								data : [],
-								type:"column"
+								type:"column",
+								color:"#7cb5ec"
 							
 							}, {
 								name : "",
-								data : []
+								data : [],
+								color:"#7cb5ec"
 							}, {
 								name : " ",
 								data : [],
-								type:"column"
+								type:"column",
+								color:"#434348"
 							}, {
 								name : " ",
-								data : []
+								data : [],
+								color:"#434348"
 							} ]
 						};
 
+						$("#checkbox1").change(function(){
+							var series1 = chart.series[0];
+							 var series2 = chart.series[2];
+							 
+						        if (series1.visible) {
+						            series1.hide();
+						            series2.hide();
+						        } else {
+						            series1.show();
+						            series2.show();
+						        }
+						});
+						$("#checkbox2").change(function(){
+							 var series1 = chart.series[1];
+							 var series2 = chart.series[3];
+							 
+						        if (series1.visible) {
+						            series1.hide();
+						            series2.hide();
+						        } else {
+						            series1.show();
+						            series2.show();
+						        }
+						});
+						
+						$("#countrySelect").change(function() {
+							refreshCharts(1);
+							
+							$("#checkbox1").removeAttr("disabled");
+							$("#checkbox2").removeAttr("disabled");
+							
+							
+						});
+						$("#countrySelect2").change(function() {
+							refreshCharts(2);
+							$("#checkbox1").removeAttr("disabled");
+							$("#checkbox2").removeAttr("disabled");
+						});
+						
+						
 						function refreshCharts(n) {
 							var countryName;
 							if(n == 1){
@@ -155,7 +226,7 @@
 								
 									option.xAxis.categories = json_year;
 
-									var chart = new Highcharts.Chart(option);
+									 chart = new Highcharts.Chart(option);
 
 								},
 								error : function() {
@@ -164,37 +235,6 @@
 							});
 						};
 					</script>
-				</div>
-
-				<br>
-				<div>
-					<input type="checkbox">Arrivées (Millions)
-				</div>
-
-				<br>
-				<div>
-					<input type="checkbox">Recette (Millions)
-				</div>
-
-				<br>
-
-				<div class="col-md-8">
-					<button class="btn btn-default" type="button"
-						data-toggle="collapse" data-target="#collapseExample"
-						aria-expanded="false" aria-controls="collapseExample">Détails</button>
-
-					<div class="collapse" id="collapseExample">
-						<br>
-						<div>
-							<input type="checkbox"> Toutes les donées
-						</div>
-						<div>
-							<input type="checkbox"> Comparaison dans le monde
-						</div>
-					</div>
-				</div>
-
-
 
 
 			</form>
@@ -209,11 +249,5 @@
 	</div>
 
 </div>
-
-
-
-
-
-
 
 <jsp:include page="/utils/footer.jsp"></jsp:include>
