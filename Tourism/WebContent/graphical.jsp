@@ -71,7 +71,7 @@
 							<input type="checkbox"> Toutes les donées
 						</div>
 						<div>
-							<input type="checkbox"> Comparaison dans le monde
+							<input type="checkbox" id="checkCompa"> Comparaison dans le monde
 						</div>
 					</div>
 				</div>
@@ -79,7 +79,7 @@
 				<script type="text/javascript">
 					
 						var chart;
-
+						
 						var option = {
 							
 							chart : {
@@ -138,7 +138,7 @@
 								color:"#434348"
 							} ]
 						};
-
+						
 						$("#checkbox1").change(function(){
 							var series1 = chart.series[0];
 							 var series2 = chart.series[2];
@@ -178,6 +178,69 @@
 							$("#checkbox2").removeAttr("disabled");
 						});
 						
+						
+						$("#checkCompa").change(function() {
+							
+							if($("#checkCompa").prop('checked')){
+								$("#tableDiv").removeAttr("style");
+								$("#container").hide();
+								$("#tableDiv").show							
+								refreshTable();
+							}else{
+								$("#tableDiv").hide();
+								$("#container").show();
+							}													
+						});
+						
+						function refreshTable(){
+							var tableHead="";
+							var tableBody="";
+							
+							
+							var touristsName1 = chart.series[0].name;
+							var tourists1 = chart.series[0].data;
+							
+							var incomeName1 = chart.series[1].name;
+							var incomes1 = chart.series[1].data;
+							
+							var touristsName2 = chart.series[2].name;
+							var tourists2 = chart.series[2].data;
+							
+							var incomeName2 = chart.series[3].name;
+							var incomes2 = chart.series[3].data;
+							
+							tableHead = "<tr>"+
+					          "<th>Annee</th>"+
+							  "<th>"+ touristsName1+"</th>"+
+							  "<th>"+ incomeName1+"</th>"+
+							  "<th>"+ touristsName2+"</th>"+
+							  "<th>"+ incomeName2+"</th>"+
+					          "</tr>";
+					         
+						    $("#tableHead").html(tableHead);
+						      
+							 for(var i = 0;i<tourists1.length;i++){
+								 tableBody = tableBody +"<tr>"+
+						    	  "<td>"+
+						    	  tourists1[i].category+
+						    	  "</td>"+
+						    	  "<td>"+
+						    	  	tourists1[i].options.y+
+						    	  "</td>"+
+						    	  "<td>"+
+						    	  incomes1[i].options.y+
+						    	  "</td>"+
+						    	  "<td>"+
+						    	  	tourists2[i].options.y+
+						    	  "</td>"+
+						    	  "<td>"+
+						    	  incomes2[i].options.y+
+						    	  "</td>"+
+						    	  "</tr>";
+						      }
+							 
+						      $("#tableBody").html(tableBody);
+						};
 						
 						function refreshCharts(n) {
 							var countryName;
@@ -245,7 +308,15 @@
 
 	<div class="col-md-7 ">
 		<div id="container"
-			style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			style="display: ; min-width: 310px; height: 400px; margin: 0 auto">
+		</div>
+		<div id="tableDiv" style="display:">
+		<table class="table table-bordered" id ="table">
+    		<thead id="tableHead"></thead>
+    		<tbody id="tableBody"></tbody>
+   		 </table>
+		</div>
+					
 	</div>
 
 </div>
