@@ -9,7 +9,7 @@
 	href="/Tourism/ETC/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 <script src="/Tourism/ETC/JQuery/jquery-1.12.1.min.js"></script>
 <script src="/Tourism/ETC/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-<script src="/Tourism/ETC/Highcharts-4.2.4/highcharts.js"></script>
+
 <script
 	src="/Tourism/ETC/bootstrap-select/js/bootstrap-select.js"></script>
 	<link rel="stylesheet"
@@ -29,8 +29,8 @@
       <a class="navbar-brand" href="#">Statourist</a>
     </div>
   	<div class="navbar-right">
-  	  	<button class="btn btn-info btn-sm navbar-btn" >Aperçu Graphique</button>
-  		<button class="btn btn-info btn-sm navbar-btn" >Carte du Monde</button>
+  	  	<a class="btn btn-info btn-sm navbar-btn" href="<%=request.getContextPath()%>/graphical.jsp">Aperçu Graphique</a>
+  		<a class="btn btn-info btn-sm navbar-btn" href="<%=request.getContextPath()%>/map.jsp">Carte du Monde</a>
   	</div>
  
   </div><!-- /.container-fluid -->

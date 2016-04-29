@@ -6,7 +6,7 @@
 <%@ page import="model.Country"%>
 <jsp:include page="/utils/header.jsp"></jsp:include>
 
-
+<script src="/Tourism/ETC/Highcharts-4.2.4/highcharts.js"></script>
 <div class="row">
 	<div class="col-md-4">
 		<div class="col-md-10 col-md-offset-2">
@@ -36,7 +36,6 @@
 						id="countrySelect2">
 						<%
 							ArrayList<String> countrys2 = CountryDB.getAllCountryName();
-
 							for (String name : countrys2) {
 						%>
 						<option><%=name%></option>
@@ -44,6 +43,8 @@
 						<%
 							}
 						%>
+						
+						
 					</select>
 					
 				</div>
@@ -120,22 +121,22 @@
 							series : [ {
 								name : "",
 								data : [],
-								type:"column",
-								color:"#7cb5ec"
+								
+								
 							
 							}, {
 								name : "",
 								data : [],
-								color:"#7cb5ec"
+								
 							}, {
 								name : " ",
 								data : [],
-								type:"column",
-								color:"#434348"
+								
+								
 							}, {
 								name : " ",
 								data : [],
-								color:"#434348"
+								
 							} ]
 						};
 						
