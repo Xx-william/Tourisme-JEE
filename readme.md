@@ -27,17 +27,20 @@ Les principales fonctionnalités du site sont regroupées sur 2 onglets comme af
 La liste des pays et des régions se trouve sur les onglets « recettes 20 pays» et « arrivée régions mondiales » du fichier Excel contenant les données.
 * Onglet « Carte du monde » permettant à l’utilisateur de voir une carte avec un dégradé de couleur illustrant l’arrivée de touriste ou le montant des recettes pour une année donné
  ![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/page1.jpg)
+
     Figure 3: Première page du site
 
 La première page du site apparait sur la figure 3. Par défaut, l’évolution du nombre de touriste et des recettes par ans pour la France s’affiche. L’utilisateur sélectionné s’il veut afficher l’évolution du nombre de touriste ou les recettes en cochant le champ comme indiqué sur l’IHM.
 
 ![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/page1.jpg)
+
     Figure 4: Détails des statistiques
     
 En cliquant sur « Détails », un tableau des données s’affiche avec le détail de tous les chiffres ayant servis à faire la courbe.
 Par exemple, sur la figure 4, l’utilisateur a choisis de comparer 2 pays (France et Chine) et affiche le détail des données de cette comparaison.
 
 ![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/page1.jpg)
+
     Figure 5: Visualisation graphique des statistiques
     
 En cliquant sur l’onglet « carte du monde », l’utilisateur pourra visualiser les statistiques de manière graphique à l’aide d’une carte. Un dégradé de couleur verte montrera le pourcentage par rapport au monde de l’arrivée des touristes ou des recettes pour 5 régions (Europe, Asie et Pacifique, Amérique, Afrique et Moyen Orient) ou 5 pays (France, Chine, Espagne et Italie). Plus l’arrivée ou les recettes
