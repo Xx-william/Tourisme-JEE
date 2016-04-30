@@ -4,9 +4,11 @@ Réalisation d’un site web permettant le traitement et l’affichage de statis
 ### Fonctionnalités principales et utilisateurs
 
 ![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/usercase.jpg)
+    
     Figure 1: Diagramme UML de cas d'utilisation
     
 ![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/front-page.jpg)
+    
     Figure 2: Page d'accueil du site
     
 Lorsque l’utilisateur arrive sur le site, la première page affichée est la page illustrée sur la figure 2. L’utilisateur doit identifier son statut en cliquant sur un des boutons :
