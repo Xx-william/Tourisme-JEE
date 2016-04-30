@@ -14,6 +14,71 @@ public class CountryDB {
 	private static String GET_NUM_TOURISTS = "SELECT tourist.tourist_num,tourist.tourist_year FROM country INNER JOIN tourist ON country.country_id=tourist.tourist_countryID WHERE country.country_name=?";
 	private static String GET_ALL_COUNTRY = "SELECT * FROM country";
 	private static String GET_YEARS = "SELECT income_year FROM income WHERE income_countryId = 2";
+	private static String GET_HCKEY = "SELECT country_hckey FROM country WHERE country_name = ?";
+	private static String GET_NAMES_BY_REGION = "SELECT country_name FROM country WHERE country_region=?";
+
+	public static String getHcKey(String countryName) {
+		String hckey = "";
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(GET_HCKEY);
+			stmt.setString(1, countryName);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				hckey = rs.getString("country_hckey");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				DBUtil.dropConnection(conn);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return hckey;
+	}
+
+	public static ArrayList<String> getCountryNamesByRegion(String regionName) {
+		ArrayList<String> countryNames = new ArrayList<String>();
+		Connection conn = null;
+
+		try {
+			conn = DBUtil.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(GET_NAMES_BY_REGION);
+			stmt.setString(1, regionName);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				String name = rs.getString("country_name");
+				countryNames.add(name);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				DBUtil.dropConnection(conn);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return countryNames;
+	}
+
+	public static ArrayList<Country> getCountrysByRegion(String regionName) {
+		ArrayList<Country> countrys = new ArrayList<Country>();
+		ArrayList<String> countryNames = CountryDB.getCountryNamesByRegion(regionName);
+
+		for (String name : countryNames) {
+			Country country = CountryDB.getCountryByName(name);
+			countrys.add(country);
+		}
+		return countrys;
+	}
 
 	public static ArrayList<Integer> getYears() {
 		ArrayList<Integer> years = new ArrayList<Integer>();
@@ -26,7 +91,7 @@ public class CountryDB {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				
+
 				int year = rs.getInt("income_year");
 				years.add(year);
 			}
@@ -46,8 +111,8 @@ public class CountryDB {
 
 		HashMap<Integer, Double> tourists = getTourist(countryName);
 		HashMap<Integer, Double> incomes = getIncomes(countryName);
-
-		Country country = new Country(countryName, tourists, incomes);
+		String hckey = getHcKey(countryName);
+		Country country = new Country(countryName, hckey, tourists, incomes);
 		return country;
 	}
 
@@ -63,9 +128,10 @@ public class CountryDB {
 
 			while (rs.next()) {
 				String countryName = rs.getString("country_name");
+				String hckey = rs.getString("country_hckey");
 				HashMap<Integer, Double> tourists = getTourist(countryName);
 				HashMap<Integer, Double> incomes = getIncomes(countryName);
-				Country country = new Country(countryName, tourists, incomes);
+				Country country = new Country(countryName, hckey, tourists, incomes);
 				countrys.add(country);
 			}
 		} catch (Exception e) {

@@ -9,7 +9,8 @@
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
-
+<script
+	src="https://code.highcharts.com/mapdata/custom/world-continents.js"></script>
 
 <div class="col-md-4">
 	<div class="col-md-10 col-md-offset-2">
@@ -19,34 +20,33 @@
 		<form>
 			<div>
 				<select class="selectpicker" title="Select one type" id="select1">
-					<option>Région</option>
-					<option>Pays</option>
+					<option selected value="1">Région</option>
+					<option value="2">Pays</option>
 				</select>
 			</div>
 			<br>
 			<div>
 				<select class="selectpicker" title="Select one year" id="select2">
 					<%
-							ArrayList<Integer> years = CountryDB.getYears();
+						ArrayList<Integer> years = CountryDB.getYears();
+						for (int year : years) {
+					%>
+					<option value="<%=year%>"><%=year%></option>
 
-							for (int year : years) {
-						%>
-						<option><%=year%></option>
-
-						<%
-							}
-						%>
+					<%
+						}
+					%>
 				</select>
 			</div>
 			<br>
 			<div>
-				<input type="checkbox" id="checkbox1" checked >Arrivées
+				<input type="radio" name="datatype" id="radio1" value="1" checked>Arrivées
 				(Millions)
 			</div>
 
 			<br>
 			<div>
-				<input type="checkbox" id="checkbox2"  >Recette
+				<input type="radio" name="datatype" value="2" id="radio2">Recette
 				(Millions)
 
 			</div>
@@ -56,67 +56,187 @@
 	</div>
 </div>
 <div class="col-md-7">
-<div id="container"></div>
+	<div id="container"></div>
 </div>
 <script>
-$(function () {
-	
-    // Prepare demo data
-    var data = [
-        {
-            "hc-key": "fo",
-            "value": 0
-        },
-        {
-            "hc-key": "um",
-            "value": 1
-        },
-        {
-            "hc-key": "us",
-            "value": 2
-        }
-    ];
+	var typeSelect = $("#select1").val();
+	var yearSelect = "";
+	var datatype = $("input[name='datatype']:checked").val();
+	var map;
 
-    // Initiate the chart
-    $('#container').highcharts('Map', {
+	$("#select1").change(function() {
+		typeSelect = $("#select1").val();
 
-        title : {
-            text : 'Highmaps basic demo'
-        },
+		refreshMap();
+	});
+	$("#select2").change(function() {
+		yearSelect = $("#select2").val();
+		refreshMap();
+	});
 
-        subtitle : {
-            text : 'Source'
-        },
+	$("input[name='datatype']").change(function() {
+		datatype = $("input[name='datatype']:checked").val();
+		refreshMap();
+	});
 
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
-            }
-        },
+	function refreshMap() {
+		// Prepare demo data
+		var data = [];
+		var option = {
+			chart : {
+				renderTo : "container"
+			},
+			title : {
+				text : 'Carte du monde'
+			},
 
-        colorAxis: {
-            min: 0
-        },
+			subtitle : {
+				text : 'Source: OpenData'
+			},
 
-        series : [{
-            data : data,
-            mapData: Highcharts.maps['custom/world'],
-            joinBy: 'hc-key',
-            name: 'Random data',
-            states: {
-                hover: {
-                    color: '#BADA55'
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}'
-            }
-        }]
-    });
-});
+			mapNavigation : {
+				enabled : true,
+				buttonOptions : {
+					verticalAlign : 'bottom'
+				}
+			},
 
+			colorAxis : {
+				min : 0
+			},
+
+			series : [ {
+				data : data,
+				//mapData: Highcharts.maps['custom/world'],
+				mapData : '',
+				joinBy : 'hc-key',
+				name : '',
+				states : {
+					hover : {
+						color : '#BADA55'
+					}
+				}
+
+			} ]
+
+		};
+		if (yearSelect == "") {
+
+		} else {
+			$
+					.ajax({
+						type : "POST",
+						url : "/Tourism/Controller/Map",
+						data : {
+
+						},
+						dataType : "json",
+						success : function(data) {
+
+							if (typeSelect == "1") {
+								option.series[0].mapData = Highcharts.maps['custom/world-continents'];
+								if (datatype == "2") {
+									dataT = [
+											{
+												"hc-key" : "eu",
+												"value" : data[0].regionIncomes[yearSelect]
+											},
+											{
+												"hc-key" : "oc",
+												"value" : data[1].regionIncomes[yearSelect]
+											},
+											{
+												"hc-key" : "af",
+												"value" : data[3].regionIncomes[yearSelect]
+											},
+											{
+												"hc-key" : "as",
+												"value" : data[1].regionIncomes[yearSelect]
+											},
+											{
+												"hc-key" : "na",
+												"value" : data[2].regionIncomes[yearSelect]
+											},
+											{
+												"hc-key" : "sa",
+												"value" : data[2].regionIncomes[yearSelect]
+											} ];
+									option.series[0].name = yearSelect + " Recette";
+								} else {
+									dataT = [
+											{
+												"hc-key" : "eu",
+												"value" : data[0].regionTourists[yearSelect]
+											},
+											{
+												"hc-key" : "oc",
+												"value" : data[1].regionTourists[yearSelect]
+											},
+											{
+												"hc-key" : "af",
+												"value" : data[3].regionTourists[yearSelect]
+											},
+											{
+												"hc-key" : "as",
+												"value" : data[1].regionTourists[yearSelect]
+											},
+											{
+												"hc-key" : "na",
+												"value" : data[2].regionTourists[yearSelect]
+											},
+											{
+												"hc-key" : "sa",
+												"value" : data[2].regionTourists[yearSelect]
+											} ];
+									option.series[0].name = yearSelect + " Arrivées";
+								}
+								option.series[0].data = dataT;
+								
+							} else {
+
+								option.series[0].mapData = Highcharts.maps['custom/world'];
+								if (datatype == "1") {
+									var dataT=[];
+									for (var i = 0; i<5; i++) {
+										var countrys = data[i].countrys;
+
+										for (var j = 0; j < countrys.length; j++) {
+											var countrytemp = {
+												"hc-key" : countrys[j].hckey,
+												"value" : countrys[j].tourists[yearSelect]
+											};
+											dataT.push(countrytemp);
+										}
+
+									}
+									option.series[0].name = yearSelect + " Arrivées";
+								} else {
+									var dataT=[];
+									for (var i = 0; i<5; i++) {
+										var countrys = data[i].countrys;
+										for (var j = 0; j < countrys.length; j++) {
+											var countrytemp = {
+												"hc-key" : countrys[j].hckey,
+												"value" : countrys[j].income[yearSelect]
+											};
+											dataT.push(countrytemp);
+										}
+
+									}
+									option.series[0].name = yearSelect + " Recette";
+								}
+								option.series[0].data = dataT;
+								
+							}
+							map = new Highcharts.Map(option);
+						},
+						error : function() {
+							$("#testDiv").append("<h1>fails</h1>");
+						}
+					});
+
+		}
+	}
 </script>
 
 <jsp:include page="/utils/footer.jsp"></jsp:include>

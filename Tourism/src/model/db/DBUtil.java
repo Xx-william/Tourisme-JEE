@@ -15,7 +15,7 @@ public class DBUtil {
 	private static DataSource getDataSource() throws NamingException {
 
 		Context ctx = new InitialContext();
-		ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Tourism");
+		ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tourism");
 		return ds;
 
 	}

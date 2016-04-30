@@ -121,9 +121,7 @@
 							series : [ {
 								name : "",
 								data : [],
-								
-								
-							
+														
 							}, {
 								name : "",
 								data : [],
@@ -286,8 +284,7 @@
 										option.series[3].name = countryName + " recettes";
 										option.series[3].data = json_incomes;	
 									}
-																	
-								
+																									
 									option.xAxis.categories = json_year;
 
 									 chart = new Highcharts.Chart(option);
