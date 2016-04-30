@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,102 +11,122 @@
 <script src="/Tourism/ETC/JQuery/jquery-1.12.1.min.js"></script>
 <script src="/Tourism/ETC/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script src="/Tourism/ETC/Highcharts-4.2.4/highcharts.js"></script>
+<script src="/Tourism/ETC/Bootstrap-validator/validator.min.js"></script>
 </head>
 
 <body>
-<br>
-<br>
-<br>
-<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
-<div class="jumbotron">
-	<center>  <h1>Bienvenue</h1></center>
+	<div class="jumbotron">
+		<center>
+			<h1>Bienvenue</h1>
+		</center>
 
-<br>
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-		<p><b>Je suis: </b></p>
-		</div>			
-	</div>
-	
-	<div class="row">
-		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-primary btn-lg btn-block" href="<%=request.getContextPath()%>/Controller/Login?id=1" role="button">Professionnel du tourisme</a></p>
+		<br>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<p>
+					<b>Je suis: </b>
+				</p>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-primary btn-lg btn-block" href="<%=request.getContextPath()%>/Controller/Login?id=2" role="button">Développeur</a></p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-primary btn-lg btn-block"  href="<%=request.getContextPath()%>/Controller/Login?id=3" role="button">Curieux</a></p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-primary btn-lg btn-block" href="<%=request.getContextPath()%>/Controller/Login?id=4" role="button">Pas de réponse</a></p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4 col-md-offset-5">
-		<p><a class="btn btn-info btn-lg btn-block" href="<%=request.getContextPath()%>/Ajouter.jsp" role="button">Admin</a></p>
-		</div>
-	</div>
- 
-  
-  
-</div>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<script> $(function () {
-    $('#container').highcharts({
-        title: {
-            text: 'Monthly Average Temperature',
-            x: -20 //center
-        },
-        subtitle: {
-            text: 'Source: WorldClimate.com',
-            x: -20
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-        }, {
-            name: 'Berlin',
-            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }]
-    });
-});</script>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-5">
+				<p>
+					<a class="btn btn-primary btn-lg btn-block"
+						href="<%=request.getContextPath()%>/Controller/Login?id=1"
+						role="button">Professionnel du tourisme</a>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-5">
+				<p>
+					<a class="btn btn-primary btn-lg btn-block"
+						href="<%=request.getContextPath()%>/Controller/Login?id=2"
+						role="button">Développeur</a>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-5">
+				<p>
+					<a class="btn btn-primary btn-lg btn-block"
+						href="<%=request.getContextPath()%>/Controller/Login?id=3"
+						role="button">Curieux</a>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-5">
+				<p>
+					<a class="btn btn-primary btn-lg btn-block"
+						href="<%=request.getContextPath()%>/Controller/Login?id=4"
+						role="button">Pas de réponse</a>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-5">
+				<button class="btn btn-info btn-block btn-lg" type="button"
+					data-toggle="collapse" data-target="#collapseExample"
+					aria-expanded="false" aria-controls="collapseExample">Admin</button>
+
+				<br>
+				<div class="collapse" id="collapseExample">
+						<form id="form" method="post" data-toggle="validator"
+					role="form">
+						<div class="input-group">
+							<input type="password" class="form-control"
+								placeholder="Mot de passe" name="password"> <span
+								class="input-group-btn">
+								<button class="btn btn-default" type="submit">Connecter</button>
+							</span>
+						</div>
+						<!-- /input-group -->
+					</form>
+					<br>
+					<div id="ajaxResponse">
+					
+					</div>
+					<script>
+					$('#form').validator().on('submit', function (e) {
+						$("#ajaxResponse").empty();
+						  if (e.isDefaultPrevented()) {
+						    // handle the invalid form...
+						  } else {
+							  var form = $('#form');
+								$.ajax({type : "POST",
+									url : "<%=request.getContextPath()%>/Controller/Login",
+									data : form.serialize(),
+									success : function(data) {
+									if (data.isSuccess == "false") {
+										$("#ajaxResponse").append("<div class='alert alert-danger' role='alert'>Mot de passe incorrect</div>");
+									} else{
+										location.href = "<%=request.getContextPath()%>/page/admin.jsp";
+										
+									}
+									},
+									error : function() {										
+											$("#ajaxResponse").append("Serveur Error");
+											}
+								});
+								return false;
+						  }
+						})					
+				    </script>
+				</div>
+			</div>
+		</div>
+
+
+
+
+	</div>
+
 </body>
 </html>

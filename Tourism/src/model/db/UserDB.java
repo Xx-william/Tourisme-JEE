@@ -3,6 +3,7 @@ package model.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import model.Users;
 
@@ -12,7 +13,33 @@ public class UserDB {
 		private static String ADD_USER = "INSERT INTO USER(user_type,user_count) VALUES(?,?)";
 		private static String GET_USER_BY_ID = "SELECT * FROM user WHERE user_id = ?";
 		private static String FREFRESH_USER = "UPDATE user SET user_count=? WHERE user_id=?";
+		private static String GET_ALL_USER = "SELECT * FROM user";
 		
+		public static ArrayList<Users> getAllUsers(){
+			ArrayList<Users> users = new ArrayList<Users>();
+			Connection conn = null;
+			try{
+				conn = DBUtil.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(GET_ALL_USER);
+				
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){
+					String type = rs.getString("user_type");
+					int count = rs.getInt("user_count");
+					Users user = new Users(type,count);
+					users.add(user);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				try{
+					DBUtil.dropConnection(conn);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}			
+			return users;
+		}
 		public static void refreshUser(int userId,Users user){
 			Connection conn = null;
 			try{

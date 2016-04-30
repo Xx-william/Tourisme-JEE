@@ -26,7 +26,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Statourist</a>
+      <a class="navbar-brand" href="<%=request.getContextPath()%>">Statourist</a>
     </div>
   	<div class="navbar-right">
   	  	<a class="btn btn-info btn-sm navbar-btn" href="<%=request.getContextPath()%>/graphical.jsp">Aperçu Graphique</a>
