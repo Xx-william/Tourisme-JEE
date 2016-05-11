@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import model.MD5;
+
 public class AdminDB {
 	private static String GET_ADMIN = "SELECT * FROM admin WHERE admin_pass = ?";
 
@@ -12,7 +14,7 @@ public class AdminDB {
 		try {
 			conn = DBUtil.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(GET_ADMIN);
-			stmt.setString(1, password);
+			stmt.setString(1, MD5.getMD5ofStr(password));
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()){
 				return true;
