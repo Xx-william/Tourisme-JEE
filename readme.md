@@ -32,14 +32,14 @@ La liste des pays et des régions se trouve sur les onglets « recettes 20 pays�
 
 La première page du site apparait sur la figure 3. Par défaut, l’évolution du nombre de touriste et des recettes par ans pour la France s’affiche. L’utilisateur sélectionné s’il veut afficher l’évolution du nombre de touriste ou les recettes en cochant le champ comme indiqué sur l’IHM.
 
-![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/page1.jpg)
+![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/page2.jpg)
 
     Figure 4: Détails des statistiques
     
 En cliquant sur « Détails », un tableau des données s’affiche avec le détail de tous les chiffres ayant servis à faire la courbe.
 Par exemple, sur la figure 4, l’utilisateur a choisis de comparer 2 pays (France et Chine) et affiche le détail des données de cette comparaison.
 
-![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/page1.jpg)
+![image](https://github.com/Xx-william/Tourisme-JEE/blob/master/Img/page3.jpg)
 
     Figure 5: Visualisation graphique des statistiques
     
