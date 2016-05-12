@@ -1,3 +1,4 @@
+
 package controller;
 
 import java.io.IOException;
@@ -15,36 +16,46 @@ import model.Users;
 import model.db.AdminDB;
 import model.db.UserDB;
 
+/**
+ * 
+ * This class is use to specify the method of login. If the request is send by
+ * method 'Post', it is the admin login, then check the password If the request
+ * is send by method 'Get', it is the user login, we record the type of the user
+ * 
+ * @author WANG XI - GAUTHIER Pierre
+ */
 @WebServlet("/Controller/Login")
-public class Login extends HttpServlet{
+public class Login extends HttpServlet {
 
+	private static final long serialVersionUID = 2774917559919029001L;
+
+	// Admin login
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String password = req.getParameter("password");
 		boolean check = AdminDB.checkAdmin(password);
-		if(check){
+		if (check) {
 			HttpSession session = req.getSession();
-			session.setAttribute("isLogin", "true");		
-			
+			session.setAttribute("isLogin", "true");
+
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/graphical.jsp");
-     		dispatcher.forward(req, resp);
-		}else{
-			String json =  "{ \"isSuccess\" : \"false\"}";
+			dispatcher.forward(req, resp);
+		} else {
+			String json = "{ \"isSuccess\" : \"false\"}";
 			resp.setContentType("application/json");
 			PrintWriter out = resp.getWriter();
 			out.println(json);
 		}
-		
 
 	}
-	
-	
+
+	// User login
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String idStr = req.getParameter("id");
 		int id = Integer.parseInt(idStr);
 		Users user = UserDB.getUser(id);
 		user.addCount();
 		UserDB.refreshUser(id, user);
-			
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/graphical.jsp");
 		dispatcher.forward(req, resp);
 	}

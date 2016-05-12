@@ -19,14 +19,14 @@
 
 		<form>
 			<div>
-				<select class="selectpicker" title="Select one type" id="select1">
+				<select class="selectpicker" title="Choisir une zone" id="select1">
 					<option selected value="1">Région</option>
 					<option value="2">Pays</option>
 				</select>
 			</div>
 			<br>
 			<div>
-				<select class="selectpicker" title="Select one year" id="select2">
+				<select class="selectpicker" title="Choisir une année" id="select2">
 					<%
 						ArrayList<Integer> years = CountryDB.getYears();
 						for (int year : years) {
@@ -161,7 +161,8 @@
 												"hc-key" : "sa",
 												"value" : data[2].regionIncomes[yearSelect]
 											} ];
-									option.series[0].name = yearSelect + " Recette";
+									option.series[0].name = yearSelect
+											+ " Recette";
 								} else {
 									dataT = [
 											{
@@ -188,16 +189,17 @@
 												"hc-key" : "sa",
 												"value" : data[2].regionTourists[yearSelect]
 											} ];
-									option.series[0].name = yearSelect + " Arrivées";
+									option.series[0].name = yearSelect
+											+ " Arrivées";
 								}
 								option.series[0].data = dataT;
-								
+
 							} else {
 
 								option.series[0].mapData = Highcharts.maps['custom/world'];
 								if (datatype == "1") {
-									var dataT=[];
-									for (var i = 0; i<5; i++) {
+									var dataT = [];
+									for (var i = 0; i < 5; i++) {
 										var countrys = data[i].countrys;
 
 										for (var j = 0; j < countrys.length; j++) {
@@ -209,10 +211,11 @@
 										}
 
 									}
-									option.series[0].name = yearSelect + " Arrivées";
+									option.series[0].name = yearSelect
+											+ " Arrivées";
 								} else {
-									var dataT=[];
-									for (var i = 0; i<5; i++) {
+									var dataT = [];
+									for (var i = 0; i < 5; i++) {
 										var countrys = data[i].countrys;
 										for (var j = 0; j < countrys.length; j++) {
 											var countrytemp = {
@@ -223,10 +226,11 @@
 										}
 
 									}
-									option.series[0].name = yearSelect + " Recette";
+									option.series[0].name = yearSelect
+											+ " Recette";
 								}
 								option.series[0].data = dataT;
-								
+
 							}
 							map = new Highcharts.Map(option);
 						},

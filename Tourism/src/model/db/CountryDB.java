@@ -1,3 +1,4 @@
+
 package model.db;
 
 import java.sql.Connection;
@@ -8,6 +9,12 @@ import java.util.HashMap;
 
 import model.Country;
 
+/**
+ * This class is used to communicate with the DataBase in country data
+ * 
+ * @author WANG XI - GAUTHIER Pierre
+ *
+ */
 public class CountryDB {
 	private static String GET_ALL_COUNTRY_NAME = "SELECT country_name FROM country";
 	private static String GET_INCOME = "SELECT income.income_money,income.income_year FROM country INNER JOIN income ON country.country_id=income.income_countryId WHERE country.country_name=?";
@@ -17,6 +24,13 @@ public class CountryDB {
 	private static String GET_HCKEY = "SELECT country_hckey FROM country WHERE country_name = ?";
 	private static String GET_NAMES_BY_REGION = "SELECT country_name FROM country WHERE country_region=?";
 
+	/**
+	 * Get the HcKey according to country name
+	 * 
+	 * @param countryName
+	 *            Country name
+	 * @return HcKey
+	 */
 	public static String getHcKey(String countryName) {
 		String hckey = "";
 		Connection conn = null;
@@ -42,6 +56,13 @@ public class CountryDB {
 		return hckey;
 	}
 
+	/**
+	 * Get all country names in specified region
+	 * 
+	 * @param regionName
+	 *            Region name
+	 * @return All the country names in the region
+	 */
 	public static ArrayList<String> getCountryNamesByRegion(String regionName) {
 		ArrayList<String> countryNames = new ArrayList<String>();
 		Connection conn = null;
@@ -69,6 +90,13 @@ public class CountryDB {
 		return countryNames;
 	}
 
+	/**
+	 * Get all countrys in specified region
+	 * 
+	 * @param regionName
+	 *            Region name
+	 * @return All country in the region
+	 */
 	public static ArrayList<Country> getCountrysByRegion(String regionName) {
 		ArrayList<Country> countrys = new ArrayList<Country>();
 		ArrayList<String> countryNames = CountryDB.getCountryNamesByRegion(regionName);
@@ -80,6 +108,11 @@ public class CountryDB {
 		return countrys;
 	}
 
+	/**
+	 * Get all the year number we have in the DataBase
+	 * 
+	 * @return All the year number we have in the DataBase
+	 */
 	public static ArrayList<Integer> getYears() {
 		ArrayList<Integer> years = new ArrayList<Integer>();
 		Connection conn = null;
@@ -107,6 +140,14 @@ public class CountryDB {
 		return years;
 	}
 
+	/**
+	 * Get country by country name
+	 * 
+	 * @param countryName
+	 *            Country name
+	 * @return Country
+	 * 
+	 */
 	public static Country getCountryByName(String countryName) {
 
 		HashMap<Integer, Double> tourists = getTourist(countryName);
@@ -116,6 +157,11 @@ public class CountryDB {
 		return country;
 	}
 
+	/**
+	 * Get all country data
+	 * 
+	 * @return All country
+	 */
 	public static ArrayList<Country> getAllCountry() {
 		ArrayList<Country> countrys = new ArrayList<Country>();
 		Connection conn = null;
@@ -147,6 +193,13 @@ public class CountryDB {
 		return countrys;
 	}
 
+	/**
+	 * Get all the tourist data in specify country name
+	 * 
+	 * @param country
+	 *            country name
+	 * @return All tourist data of the country
+	 */
 	public static HashMap<Integer, Double> getTourist(String country) {
 		HashMap<Integer, Double> tourist = new HashMap<Integer, Double>();
 
@@ -174,6 +227,13 @@ public class CountryDB {
 		return tourist;
 	}
 
+	/**
+	 * Get incomes data in specify country name
+	 * 
+	 * @param country
+	 *            Country name
+	 * @return All incomes data of the country
+	 */
 	public static HashMap<Integer, Double> getIncomes(String country) {
 		HashMap<Integer, Double> incomes = new HashMap<Integer, Double>();
 
@@ -201,6 +261,11 @@ public class CountryDB {
 		return incomes;
 	}
 
+	/**
+	 * Get all the country names
+	 * 
+	 * @return All the country names
+	 */
 	public static ArrayList<String> getAllCountryName() {
 		Connection conn = null;
 		ArrayList<String> countrys = new ArrayList<String>();

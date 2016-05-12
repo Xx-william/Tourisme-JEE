@@ -1,3 +1,4 @@
+
 package model.db;
 
 import java.sql.Connection;
@@ -7,12 +8,19 @@ import java.util.ArrayList;
 
 import model.Country;
 import model.Region;
-
+/**
+ * This class is used to communicate with DataBase in region data
+ *@author WANG XI  - GAUTHIER Pierre 
+ *
+ */
 public class RegionDB {
 
 	private static String GET_ALL_REGION ="SELECT * FROM region";
 	private static String GET_NAMES_REGION = "SELECT region_name FROM region";
-	
+	/**
+	 * Get all region names from DataBase
+	 * @return All region names
+	 */
 	public static ArrayList<String> getAllRegionName(){
 		Connection conn = null;
 		ArrayList<String> regions = new ArrayList<String>();
@@ -39,7 +47,10 @@ public class RegionDB {
 		return regions;
 	}
 	
-	
+	/**
+	 * Get all regions
+	 * @return All regions
+	 */
 	public static ArrayList<Region> getAllRegion(){
 		Connection conn = null;
 		ArrayList<Region> regions = new ArrayList<Region>();

@@ -1,3 +1,4 @@
+
 package model.db;
 
 import java.sql.Connection;
@@ -8,6 +9,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+/**
+ * This class is a tool to connect the dataBase
+ * @author WANG XI  - GAUTHIER Pierre 
+ *
+ */
 public class DBUtil {
 
 	private static DataSource ds;

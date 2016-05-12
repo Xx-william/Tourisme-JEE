@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
+<title>Statourism</title>
 <link rel="stylesheet"
 	href="/Tourism/ETC/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 <script src="/Tourism/ETC/JQuery/jquery-1.12.1.min.js"></script>
@@ -78,8 +77,7 @@
 
 				<br>
 				<div class="collapse" id="collapseExample">
-						<form id="form" method="post" data-toggle="validator"
-					role="form">
+					<form id="form" method="post" data-toggle="validator" role="form">
 						<div class="input-group">
 							<input type="password" class="form-control"
 								placeholder="Mot de passe" name="password"> <span
@@ -90,9 +88,7 @@
 						<!-- /input-group -->
 					</form>
 					<br>
-					<div id="ajaxResponse">
-					
-					</div>
+					<div id="ajaxResponse"></div>
 					<script>
 					$('#form').validator().on('submit', function (e) {
 						$("#ajaxResponse").empty();
@@ -107,18 +103,22 @@
 									if (data.isSuccess == "false") {
 										$("#ajaxResponse").append("<div class='alert alert-danger' role='alert'>Mot de passe incorrect</div>");
 									} else{
-										location.href = "<%=request.getContextPath()%>/page/admin.jsp";
-										
-									}
-									},
-									error : function() {										
-											$("#ajaxResponse").append("Serveur Error");
+										location.href = "<%=request.getContextPath()%>
+						/page/admin.jsp";
+
+																}
+															},
+															error : function() {
+																$(
+																		"#ajaxResponse")
+																		.append(
+																				"Serveur Error");
+															}
+														});
+												return false;
 											}
-								});
-								return false;
-						  }
-						})					
-				    </script>
+										})
+					</script>
 				</div>
 			</div>
 		</div>
@@ -130,3 +130,4 @@
 
 </body>
 </html>
+<jsp:include page="/utils/footer.jsp"></jsp:include>

@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Statourism</title>
 
 <link rel="stylesheet"
 	href="/Tourism/ETC/bootstrap-3.3.5-dist/css/bootstrap.min.css">
@@ -38,7 +38,8 @@
 					aria-expanded="false">Admin <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a
-							href="<%=request.getContextPath()%>/Controller/Disconnect">Déconnecter</a></li>
+							href="<%=request.getContextPath()%>/Controller/Disconnect">Se
+								déconnecter</a></li>
 
 					</ul></li>
 			</ul>
@@ -63,7 +64,7 @@
 				type : "column"
 			},
 			title : {
-				text : 'Les statistiques utilisateurs',
+				text : 'Statistiques utilisateurs',
 				x : -20
 			//center
 			},
@@ -76,7 +77,7 @@
 			},
 			yAxis : {
 				title : {
-					text : 'Personne'
+					text : 'Personnes'
 				},
 				plotLines : [ {
 					value : 0,
@@ -93,10 +94,10 @@
 				verticalAlign : 'middle',
 				borderWidth : 0
 			},
-			series : [{
-				name:"",
-				data:[]
-			}]
+			series : [ {
+				name : "",
+				data : []
+			} ]
 		};
 		$.ajax({
 			type : "POST",
@@ -106,14 +107,14 @@
 				var json_countryname = new Array();
 				var json_count = new Array();
 
-				for ( var i=0;i<data.length;i++) {
+				for (var i = 0; i < data.length; i++) {
 					json_countryname.push(data[i].type);
 					json_count.push(data[i].count);
-					
+
 				}
 
-				option.series[0].name = "Nombre";
-				option.series[0].data = json_count;				
+				option.series[0].name = "Nombre de visites";
+				option.series[0].data = json_count;
 				option.xAxis.categories = json_countryname;
 
 				chart = new Highcharts.Chart(option);

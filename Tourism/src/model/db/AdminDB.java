@@ -6,9 +6,22 @@ import java.sql.ResultSet;
 
 import model.MD5;
 
+/**
+ * 
+ * This class is used to communicate with the DataBase in admin data
+ * 
+ * @author WANG XI - GAUTHIER Pierre
+ */
 public class AdminDB {
 	private static String GET_ADMIN = "SELECT * FROM admin WHERE admin_pass = ?";
 
+	/**
+	 * This method checks if the password is correct
+	 * 
+	 * @param password
+	 *            The password
+	 * @return If the password is correct
+	 */
 	public static boolean checkAdmin(String password) {
 		Connection conn = null;
 		try {
@@ -16,7 +29,7 @@ public class AdminDB {
 			PreparedStatement stmt = conn.prepareStatement(GET_ADMIN);
 			stmt.setString(1, MD5.getMD5ofStr(password));
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				return true;
 			}
 		} catch (Exception e) {

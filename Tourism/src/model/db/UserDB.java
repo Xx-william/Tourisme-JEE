@@ -1,3 +1,4 @@
+
 package model.db;
 
 import java.sql.Connection;
@@ -6,7 +7,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Users;
-
+/**
+ * This class is used to communicate with DataBase in user data
+ * @author WANG XI  - GAUTHIER Pierre 
+ */
 public class UserDB {
 	
 
@@ -14,7 +18,10 @@ public class UserDB {
 		private static String GET_USER_BY_ID = "SELECT * FROM user WHERE user_id = ?";
 		private static String FREFRESH_USER = "UPDATE user SET user_count=? WHERE user_id=?";
 		private static String GET_ALL_USER = "SELECT * FROM user";
-		
+		/**
+		 * Get all user datas
+		 * @return All user datas
+		 */
 		public static ArrayList<Users> getAllUsers(){
 			ArrayList<Users> users = new ArrayList<Users>();
 			Connection conn = null;
@@ -40,6 +47,11 @@ public class UserDB {
 			}			
 			return users;
 		}
+		/**
+		 * Refresh user data in DataBase
+		 * @param userId User id
+		 * @param user User
+		 */
 		public static void refreshUser(int userId,Users user){
 			Connection conn = null;
 			try{
@@ -58,6 +70,10 @@ public class UserDB {
 				}
 			}
 		}
+		/**
+		 * Add user to DataBase
+		 * @param user User
+		 */
 		public static void addUser(Users user){
 			Connection conn = null;
 			try{
@@ -77,7 +93,11 @@ public class UserDB {
 				}
 			}
 		}
-		
+		/**
+		 * Get user from DataBase
+		 * @param userId User id
+		 * @return Users
+		 */
 		public static Users getUser(int userId){
 			Connection conn = null;
 			Users user = new Users();
