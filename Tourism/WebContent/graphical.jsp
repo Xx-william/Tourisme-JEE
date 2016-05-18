@@ -260,14 +260,14 @@
 								}
 								if (n == 1) {
 									option.series[0].name = countryName
-											+ " arrivers";
+											+ " arrivées";
 									option.series[0].data = json_tourists;
 									option.series[1].name = countryName
 											+ " recettes";
 									option.series[1].data = json_incomes;
 								} else if (n == 2) {
 									option.series[2].name = countryName
-											+ " arrivers";
+											+ " arrivées";
 									option.series[2].data = json_tourists;
 									option.series[3].name = countryName
 											+ " recettes";
