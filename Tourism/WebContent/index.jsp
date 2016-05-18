@@ -103,10 +103,8 @@
 									if (data.isSuccess == "false") {
 										$("#ajaxResponse").append("<div class='alert alert-danger' role='alert'>Mot de passe incorrect</div>");
 									} else{
-										location.href = "<%=request.getContextPath()%>
-						/page/admin.jsp";
-
-																}
+										location.href = "<%=request.getContextPath()%>/page/admin.jsp";
+										}
 															},
 															error : function() {
 																$(
