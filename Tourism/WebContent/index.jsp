@@ -107,10 +107,7 @@
 										}
 															},
 															error : function() {
-																$(
-																		"#ajaxResponse")
-																		.append(
-																				"Serveur Error");
+																$("#ajaxResponse").append("Serveur Error");
 															}
 														});
 												return false;
@@ -120,12 +117,7 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 	</div>
-
 </body>
 </html>
 <jsp:include page="/utils/footer.jsp"></jsp:include>
